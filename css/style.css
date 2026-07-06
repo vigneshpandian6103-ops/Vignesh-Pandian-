@@ -1,0 +1,210 @@
+/* ==========================================================================
+   1. VARIABLES & THEME (2025/2026 Aesthetics)
+   ========================================================================== */
+:root {
+    --color-mocha: #AS956F;      /* Stability */
+    --color-blue: #AOD4E0;       /* Trust */
+    --color-grey: #F2FOEA;       /* Refinement */
+    --color-dark: #2C2A29;
+    --color-white: #FFFFFF;
+    
+    --font-headlines: 'Montserrat', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+/* ==========================================================================
+   2. RESET & BASE STYLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-grey);
+    color: var(--color-dark);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-headlines);
+    font-weight: 700;
+}
+
+/* Fluid Responsive Typography using clamp() */
+h1 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.2;
+}
+
+/* ==========================================================================
+   3. MOBILE-FIRST MACRO LAYOUT & NAVIGATION
+   ========================================================================== */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: var(--color-white);
+    border-bottom: 2px solid var(--color-blue);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: var(--font-headlines);
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+.nav-links {
+    display: none; /* Controlled via JS state for mobile mobile overlay drawer */
+    list-style: none;
+}
+
+.nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-white);
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.nav-links li {
+    margin: 0.5rem 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--color-dark);
+    font-weight: 500;
+}
+
+/* Mobile Hamburger Trigger */
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: var(--color-dark);
+    position: relative;
+}
+
+.hamburger::before, .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 3px;
+    background: var(--color-dark);
+    left: 0;
+}
+.hamburger::before { top: -6px; }
+.hamburger::after { bottom: -6px; }
+
+/* ==========================================================================
+   4. SECTIONS & COMPONENT GRID
+   ========================================================================== */
+.main-layout {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, var(--color-blue), var(--color-grey));
+    padding: 3rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--color-mocha);
+    color: var(--color-white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-headlines);
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: opacity 0.2s ease;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+/* Default Mobile Component Stack Layout */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.card {
+    background: var(--color-white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    border-left: 4px solid var(--color-mocha);
+}
+
+.site-footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    font-size: 0.875rem;
+    color: var(--color-dark);
+    background-color: var(--color-white);
+    margin-top: 4rem;
+}
+
+/* ==========================================================================
+   5. RESPONSIVE BREAKPOINTS (Macro Adaptation Layout)
+   ========================================================================== */
+@media (min-width: 768px) {
+    .menu-toggle {
+        display: none; /* Hide hamburger on tablet/desktop */
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+
+    .nav-links.active {
+        position: static;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .content-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 Column Grid for Tablet */
+    }
+}
+
+@media (min-width: 1024px) {
+    .content-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 Column Full Grid for Desktop */
+    }
+    
+    .hero-section {
+        padding: 5rem 3rem;
+        text-align: left;
+    }
+}
+
